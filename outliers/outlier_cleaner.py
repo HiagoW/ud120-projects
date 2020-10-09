@@ -14,7 +14,16 @@ def outlierCleaner(predictions, ages, net_worths):
     cleaned_data = []
 
     ### your code goes here
+    for index, value in enumerate(predictions):
+        pred = value
+        age = ages[index]
+        net_worth = net_worths[index]
 
+        error = abs(pred-net_worth)
+        cleaned_data.append((age,net_worth,error))
+
+    cleaned_data.sort(key=lambda tup: tup[2])
+    cleaned_data = cleaned_data[:81]
     
     return cleaned_data
 

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+from __future__ import division
 """ 
     Starter code for exploring the Enron dataset (emails + finances);
     loads up the dataset (pickled dict of dicts).
@@ -27,7 +27,7 @@ print(len(enron_data))
 print(len(enron_data[(list(enron_data.keys())[0])]))
 
 #Number of pois
-print(sum(p['poi']=='' for p in enron_data.values()))
+print(sum(p['poi']==1 for p in enron_data.values()))
 
 print(enron_data["PRENTICE JAMES"]['total_stock_value'])
 print(enron_data["COLWELL WESLEY"]['from_this_person_to_poi'])
@@ -40,3 +40,8 @@ print(enron_data["SKILLING JEFFREY K"]['total_payments'])
 #Number of known salaries and email addresses
 print(sum(p['salary']!='NaN' for p in enron_data.values()))
 print(sum(p['email_address']!='NaN' for p in enron_data.values()))
+
+#Percentage without total_payments
+print(sum(p['total_payments']=='NaN' for p in enron_data.values()))
+print(sum(p['total_payments']=='NaN' for p in enron_data.values())/len(enron_data))
+print(sum((p['total_payments']=='NaN' and p['poi']==1) for p in enron_data.values())/sum(p['poi']==1 for p in enron_data.values()))
