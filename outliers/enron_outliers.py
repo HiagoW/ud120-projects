@@ -10,10 +10,31 @@ from feature_format import featureFormat, targetFeatureSplit
 ### read in data dictionary, convert to numpy array
 data_dict = pickle.load( open("../final_project/final_project_dataset.pkl", "r") )
 features = ["salary", "bonus"]
+data_dict.pop('TOTAL',0)
 data = featureFormat(data_dict, features)
 
 
 ### your code below
 
+# To Find outlier - Result: key: TOTAL
+# for key, value in data_dict.items():
+#     if value['bonus'] == data.max():
+#         print(key)
+
+for key, value in data_dict.items():
+    try:
+        if float(value['bonus']) > 5000000 and float(value['salary']) > 1000000:
+            print(key)
+    except ValueError:
+        print('NaN')
+
+for point in data:
+    salary = point[0]
+    bonus = point[1]
+    matplotlib.pyplot.scatter( salary, bonus )
+
+matplotlib.pyplot.xlabel("salary")
+matplotlib.pyplot.ylabel("bonus")
+matplotlib.pyplot.show()
 
 
