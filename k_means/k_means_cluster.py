@@ -64,6 +64,18 @@ print(min(p['salary'] for p in data_dict.values() if p['salary'] != 'NaN'))
 ### you'll want to change this line to 
 ### for f1, f2, _ in finance_features:
 ### (as it's currently written, the line below assumes 2 features)
+
+from sklearn.preprocessing import MinMaxScaler
+salaries = [[f[0]] for f in finance_features]
+stock = [[f[1]] for f in finance_features]
+
+scaler = MinMaxScaler()
+scaler.fit(salaries)
+print(scaler.transform([[200000.]]))
+
+scaler.fit(stock)
+print(scaler.transform([[1000000.]]))
+
 for f1, f2, _ in finance_features:
     plt.scatter( f1, f2 )
 plt.show()
